@@ -29,6 +29,7 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
     private Handler handler = new Handler();
     private Button undoBut;
     private Runnable timer;
+    private int[][] genCoor; //saves the moves to generate the board
     
     private int moves = 0;
     private int moveCount = 0;
@@ -44,6 +45,7 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
         }
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_game4);
+        genCoor = new int[moves][2];
 
         current[0][0] = (ImageView)(findViewById(R.id.button00));
         current[0][1] = (ImageView)(findViewById(R.id.button01));
@@ -71,7 +73,9 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
            	int[] arr = {x, y};
            	clickBox(arr);
            	clickBox(arr);
-           	Log.d("x, y", Integer.toString(x) + " , " + Integer.toString(y));
+           	genCoor[i][0] = x;
+           	genCoor[i][1] = y;
+           	//Log.d("x, y", Integer.toString(x) + " , " + Integer.toString(y));
         }
             
         final TextView eTime = (TextView) findViewById(R.id.elapsedTime);
