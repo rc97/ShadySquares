@@ -73,10 +73,16 @@
                 android:id="@+id/moves"
                 android:text="@string/moves" />
             
-            <EditText
+            <!-- <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/numMoves"  />
+                android:id="@+id/numMoves"  /> -->
+                
+			<NumberPicker
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_gravity="center"
+			    android:id="@+id/numMoves" />
             
         </LinearLayout>
         

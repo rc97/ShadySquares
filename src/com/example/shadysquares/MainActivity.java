@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.RadioButton;
 
 public class MainActivity extends ActionBarActivity {
@@ -27,14 +28,26 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+        NumberPicker np = (NumberPicker) findViewById(R.id.numMoves);
+		np.setMaxValue(6);
+        np.setMinValue(3);
+        np.setWrapSelectorWheel(true);
+        np.setOnValueChangedListener( new NumberPicker.OnValueChangeListener() {
+                @Override
+                public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                    moves = newVal;
+                }
+            });
+        
         final Button button = (Button) findViewById(R.id.proceed);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (R.id.proceed == v.getId()) {
                 	if (gridSize != 0) {
-                		EditText et = (EditText) findViewById(R.id.numMoves);
-                		if (!et.getText().toString().equals("")) {
-                			moves = Integer.parseInt(et.getText().toString());
+                		//EditText et = (EditText) findViewById(R.id.numMoves);
+                		
+                		//if (!et.getText().toString().equals("")) {
+                			//moves = Integer.parseInt(et.getText().toString());
 	                		if (moves == 0) {
 	                			final AlertDialog diag1 = new AlertDialog.Builder(context).create();
 	                    		diag1.setTitle("");
@@ -75,7 +88,7 @@ public class MainActivity extends ActionBarActivity {
 	                    		});
 	                    		diag2.show();
 	                		}
-                		} else {
+                		} /* else {
                 			final AlertDialog diag4 = new AlertDialog.Builder(context).create();
                     		diag4.setTitle("");
                     		diag4.setMessage("Please input a number of moves");
@@ -84,7 +97,7 @@ public class MainActivity extends ActionBarActivity {
                     			public void onClick(DialogInterface dialog, int which) {}
                     		});
                     		diag4.show();
-                		}
+                		}*/
                 	}
                 	else {
                 		final AlertDialog diag3 = new AlertDialog.Builder(context).create();
@@ -95,8 +108,7 @@ public class MainActivity extends ActionBarActivity {
                 			public void onClick(DialogInterface dialog, int which) {}
                 		});
                 		diag3.show();
-                	}
-                }
+                	}                
             }
         });
     }
@@ -123,7 +135,7 @@ public class MainActivity extends ActionBarActivity {
     
     public void onRadioButtonClicked(View view) {
     	boolean checked = ((RadioButton) view).isChecked();
-    	EditText et = (EditText) findViewById(R.id.numMoves);
+    	//EditText et = (EditText) findViewById(R.id.numMoves);
     	switch(view.getId()) {
     	case R.id.size3:
     		if(checked)
@@ -144,7 +156,7 @@ public class MainActivity extends ActionBarActivity {
     		upBound = 6;
     		break;
     	}
-    	et.setHint(lowBound + " to " + upBound);
+    	//et.setHint(lowBound + " to " + upBound);
     }
 
 }

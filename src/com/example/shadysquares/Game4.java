@@ -206,6 +206,7 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
     	clickBox(prev);
     	undoBut.setEnabled(false);
     	moveCount--;
+    	startTime-=1000;
     }
     
     public boolean checkBoard() {
