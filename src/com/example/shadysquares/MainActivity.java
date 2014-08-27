@@ -59,21 +59,22 @@ public class MainActivity extends ActionBarActivity {
 	                    		diag1.show();
 	                		}
 	                		if (moves >= lowBound && moves <= upBound) {
-	                			switch(gridSize) {
+	                			/*switch(gridSize) {
 	                			case 3:
 	                				
 	                				break;
-	                			case 4:
+	                			case 4:*/
 	                				Intent startGame = new Intent(context, Game4.class);
+	                				startGame.putExtra("gridSize", gridSize);
 		                			startGame.putExtra("numMoves", moves);
 		                			startActivity(startGame);
-	                				break;
+	                				/*break;
 	                			case 5:
 	                				
 	                				break;
 	                			default:
 	                				break;
-	                			}
+	                			}*/
 	                			//Intent startGame = new Intent(context, GameActivity.class);
 	                			//startGame.putExtra("numMoves", moves);
 	                			//startActivity(startGame);

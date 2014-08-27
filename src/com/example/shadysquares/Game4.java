@@ -31,6 +31,7 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
     private Runnable timer;
     private int[][] genCoor; //saves the moves to generate the board
     
+    private int gridSize = 0;
     private int moves = 0;
     private int moveCount = 0;
     
@@ -42,6 +43,10 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
       	Bundle extras = getIntent().getExtras();
         if (extras != null) {
             moves = extras.getInt("numMoves");
+            gridSize = extras.getInt("gridSize");
+        }
+        if (gridSize != 4) {
+        	finish();
         }
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_game4);
