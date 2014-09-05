@@ -19,7 +19,7 @@ public class MainActivity extends ActionBarActivity {
 	Context context = this;
 
 	int gridSize = 0;
-	int moves = 0;
+	int moves = 3;
 	int lowBound = 3; //lower bound of acceptable moves
 	int upBound = 6; //upper bound of acceptable moves
 	

@@ -77,10 +77,11 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
         for (int i=0; i<moves; i++) {
           	int x = (int) (Math.random()*4);
            	int y = (int) (Math.random()*4);
+           	int[] arr = {x, y};
            	for (int j=0; j<i; j++) {
            		if ((x == genCoor[j][0]) && (y == genCoor[j][1])) {
            			skip = true;           			
-           			Log.d("broken", "broken");
+           			//Log.d("broken", "broken");
            			break;
            		}
            		skip = false;
@@ -89,12 +90,11 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
            		i--;
            	}
            	else {
-	           	int[] arr = {x, y};
 	           	clickBox(arr);
 	           	clickBox(arr);
 	           	genCoor[i][0] = x;
 	           	genCoor[i][1] = y;
-	           	Log.d("x, y", Integer.toString(x) + " , " + Integer.toString(y));
+	           	//Log.d("x, y", Integer.toString(x) + " , " + Integer.toString(y));
            	}
         }
             
