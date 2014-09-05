@@ -49,7 +49,7 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
         	finish();
         }
         super.onCreate(savedInstanceState);
-        super.setContentView(R.layout.activity_game4);
+        super.setContentView(R.layout.activity_game4);        
         genCoor = new int[moves][2];
 
         current[0][0] = (ImageView)(findViewById(R.id.button00));
@@ -70,20 +70,35 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
         current[3][3] = (ImageView)(findViewById(R.id.button33));
             
         undoBut = (Button) findViewById(R.id.undoBut);
+        undoBut.setEnabled(false);
             
         //Log.d("moves", Integer.toString(moves));
+        boolean skip = false;
         for (int i=0; i<moves; i++) {
           	int x = (int) (Math.random()*4);
            	int y = (int) (Math.random()*4);
-           	int[] arr = {x, y};
-           	clickBox(arr);
-           	clickBox(arr);
-           	genCoor[i][0] = x;
-           	genCoor[i][1] = y;
-           	//Log.d("x, y", Integer.toString(x) + " , " + Integer.toString(y));
+           	for (int j=0; j<i; j++) {
+           		if ((x == genCoor[j][0]) && (y == genCoor[j][1])) {
+           			skip = true;           			
+           			Log.d("broken", "broken");
+           			break;
+           		}
+           		skip = false;
+           	}
+           	if (skip) {
+           		i--;
+           	}
+           	else {
+	           	int[] arr = {x, y};
+	           	clickBox(arr);
+	           	clickBox(arr);
+	           	genCoor[i][0] = x;
+	           	genCoor[i][1] = y;
+	           	Log.d("x, y", Integer.toString(x) + " , " + Integer.toString(y));
+           	}
         }
             
-        final TextView eTime = (TextView) findViewById(R.id.elapsedTime);
+        /*final TextView eTime = (TextView) findViewById(R.id.elapsedTime);
         timer = new Runnable() {
           	@Override
            	public void run() {
@@ -95,7 +110,8 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
            		}
            	}
         };
-        handler.post(timer);
+        handler.post(timer);*/
+        startTimer();
     }
 
     public int[] findCoor(ImageView v){
@@ -120,6 +136,7 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
             ((ImageView) view).setColorFilter(Color.argb(255,order[2],order[2],order[2]));
             int[] coor = findCoor((ImageView) view);
             clickBox(coor);
+            undoBut.setEnabled(true);
             prev[0] = coor[0];
             prev[1] = coor[1];
             moveCount++;
@@ -135,6 +152,12 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
             				finish();
             			}
             		});
+            		diag1.setButton(DialogInterface.BUTTON_NEUTRAL, "Go To Leaderboard", 
+            				new DialogInterface.OnClickListener() {
+            			public void onClick(DialogInterface dialog, int which) {
+            				//intent to leaderboard
+            			}
+            		});
             		diag1.show();
             	}
             	else {
@@ -147,9 +170,18 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
             				finish();
             			}
             		});
-            		diag2.setButton(DialogInterface.BUTTON_NEUTRAL, "Keep Trying", 
+            		/*diag2.setButton(DialogInterface.BUTTON_NEUTRAL, "Keep Trying", 
             				new DialogInterface.OnClickListener() {
             			public void onClick(DialogInterface dialog, int which) {}
+            		});*/
+            		diag2.setButton(DialogInterface.BUTTON_NEUTRAL, "Retry this Board", 
+            				new DialogInterface.OnClickListener() {
+            			public void onClick(DialogInterface dialog, int which) {
+            				clearBoard();
+            				makeMoves(genCoor);
+            				startTimer();
+            				resetState();
+            			}
             		});
             		diag2.show();
             	}
@@ -182,7 +214,6 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
         colorStates[coor[0]][coor[1]] = (colorStates[coor[0]][coor[1]] + 2) % 3;
         col = colorStates[coor[0]][coor[1]];
         current[coor[0]][coor[1]].setColorFilter(Color.argb(255, order[col], order[col], order[col]));
-        undoBut.setEnabled(true);
     }
 
     @Override
@@ -223,6 +254,46 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
     		}
     	}
     	return true;
+    }
+    
+    public void clearBoard() {
+    	for (int i=0; i< gridSize; i++) {
+    		for (int j=0; j<gridSize; j++) {
+    			colorStates[i][j] = 0;
+    			current[i][j].setColorFilter(Color.argb(255, order[0], order[0], order[0]));
+    		}
+    	}
+    }
+    
+    public void makeMoves(int[][] moves) {
+    	int coor[] = {0, 0};
+    	for (int i=0; i<moves.length; i++) {
+    		coor[0] = moves[i][0];
+    		coor[1] = moves[i][1];
+    		clickBox(coor);
+    		clickBox(coor);
+    	}
+    }
+    
+    public void startTimer() {
+    	startTime = System.currentTimeMillis();
+    	final TextView eTime = (TextView) findViewById(R.id.elapsedTime);
+        timer = new Runnable() {
+          	@Override
+           	public void run() {
+           		elapsedTime = System.currentTimeMillis() - startTime;
+           		eTime.setText("" + elapsedTime);
+           		handler.postDelayed(this, 30);
+           		if (elapsedTime > 1000000) {
+           			handler.removeCallbacks(this);
+           		}
+           	}
+        };
+        handler.post(timer);
+    }
+    
+    public void resetState() {
+    	moveCount = 0;
     }
 
 }
