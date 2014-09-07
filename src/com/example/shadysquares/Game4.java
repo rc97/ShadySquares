@@ -52,9 +52,9 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
         else if(gridSize == 3) {
         	super.setContentView(R.layout.activity_game3);
         }
-        /*else if(gridSize == 5) {
+        else if(gridSize == 5) {
         	super.setContentView(R.layout.activity_game5);
-        }*/
+        }
         else {
         	finish();
         }
@@ -79,18 +79,22 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
 	        current[3][3] = (ImageView)(findViewById(R.id.button33));
         }
         if (gridSize > 4) {
-        	current[0][3] = (ImageView)(findViewById(R.id.button04));
-            current[1][3] = (ImageView)(findViewById(R.id.button14));
-	        current[2][3] = (ImageView)(findViewById(R.id.button24));
-	        current[3][3] = (ImageView)(findViewById(R.id.button34));
-	        current[3][0] = (ImageView)(findViewById(R.id.button40));
-	        current[3][1] = (ImageView)(findViewById(R.id.button41));
-	        current[3][2] = (ImageView)(findViewById(R.id.button42));
-	        current[3][3] = (ImageView)(findViewById(R.id.button43));
-	        current[3][3] = (ImageView)(findViewById(R.id.button44));
+        	Log.d("getting", "here");
+        	current[0][4] = (ImageView)(findViewById(R.id.button04));
+            current[1][4] = (ImageView)(findViewById(R.id.button14));
+	        current[2][4] = (ImageView)(findViewById(R.id.button24));
+	        current[3][4] = (ImageView)(findViewById(R.id.button34));
+	        current[4][0] = (ImageView)(findViewById(R.id.button40));
+	        current[4][1] = (ImageView)(findViewById(R.id.button41));
+	        current[4][2] = (ImageView)(findViewById(R.id.button42));
+	        current[4][3] = (ImageView)(findViewById(R.id.button43));
+	        current[4][4] = (ImageView)(findViewById(R.id.button44));
         }
             
         undoBut = (Button) findViewById(R.id.undoBut);
+        if (undoBut == null) {
+        	Log.d("undoBut", "null");
+        }
         undoBut.setEnabled(false);
             
         //Log.d("moves", Integer.toString(moves));
@@ -98,6 +102,7 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
         for (int i=0; i<moves; i++) {
           	int x = (int) (Math.random()*gridSize);
            	int y = (int) (Math.random()*gridSize);
+           	//Log.d("x, y", Integer.toString(x) + " , " + Integer.toString(y));
            	int[] arr = {x, y};
            	for (int j=0; j<i; j++) {
            		if ((x == genCoor[j][0]) && (y == genCoor[j][1])) {
@@ -115,7 +120,6 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
 	           	clickBox(arr);
 	           	genCoor[i][0] = x;
 	           	genCoor[i][1] = y;
-	           	//Log.d("x, y", Integer.toString(x) + " , " + Integer.toString(y));
            	}
         }
             
