@@ -21,8 +21,8 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
     public boolean show = true;
     
     private int[] order = {190,120,75};
-    private ImageView[][] current = new ImageView[4][4];
-    private int[][] colorStates = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}};
+    private ImageView[][] current = new ImageView[5][5];
+    private int[][] colorStates = {{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0}};
     private int[] prev = new int[2];
     private long startTime = System.currentTimeMillis();
     private long elapsedTime;
@@ -45,29 +45,50 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
             moves = extras.getInt("numMoves");
             gridSize = extras.getInt("gridSize");
         }
-        if (gridSize != 4) {
+        super.onCreate(savedInstanceState);
+        if (gridSize == 4) {
+            super.setContentView(R.layout.activity_game4);   
+        }
+        else if(gridSize == 3) {
+        	super.setContentView(R.layout.activity_game3);
+        }
+        /*else if(gridSize == 5) {
+        	super.setContentView(R.layout.activity_game5);
+        }*/
+        else {
         	finish();
         }
-        super.onCreate(savedInstanceState);
-        super.setContentView(R.layout.activity_game4);        
         genCoor = new int[moves][2];
 
         current[0][0] = (ImageView)(findViewById(R.id.button00));
         current[0][1] = (ImageView)(findViewById(R.id.button01));
         current[0][2] = (ImageView)(findViewById(R.id.button02));
-        current[0][3] = (ImageView)(findViewById(R.id.button03));
         current[1][0] = (ImageView)(findViewById(R.id.button10));
         current[1][1] = (ImageView)(findViewById(R.id.button11));
         current[1][2] = (ImageView)(findViewById(R.id.button12));
-        current[1][3] = (ImageView)(findViewById(R.id.button13));
         current[2][0] = (ImageView)(findViewById(R.id.button20));
         current[2][1] = (ImageView)(findViewById(R.id.button21));
         current[2][2] = (ImageView)(findViewById(R.id.button22));
-        current[2][3] = (ImageView)(findViewById(R.id.button23));
-        current[3][0] = (ImageView)(findViewById(R.id.button30));
-        current[3][1] = (ImageView)(findViewById(R.id.button31));
-        current[3][2] = (ImageView)(findViewById(R.id.button32));
-        current[3][3] = (ImageView)(findViewById(R.id.button33));
+        if (gridSize > 3) {
+            current[0][3] = (ImageView)(findViewById(R.id.button03));
+            current[1][3] = (ImageView)(findViewById(R.id.button13));
+	        current[2][3] = (ImageView)(findViewById(R.id.button23));
+	        current[3][0] = (ImageView)(findViewById(R.id.button30));
+	        current[3][1] = (ImageView)(findViewById(R.id.button31));
+	        current[3][2] = (ImageView)(findViewById(R.id.button32));
+	        current[3][3] = (ImageView)(findViewById(R.id.button33));
+        }
+        if (gridSize > 4) {
+        	current[0][3] = (ImageView)(findViewById(R.id.button04));
+            current[1][3] = (ImageView)(findViewById(R.id.button14));
+	        current[2][3] = (ImageView)(findViewById(R.id.button24));
+	        current[3][3] = (ImageView)(findViewById(R.id.button34));
+	        current[3][0] = (ImageView)(findViewById(R.id.button40));
+	        current[3][1] = (ImageView)(findViewById(R.id.button41));
+	        current[3][2] = (ImageView)(findViewById(R.id.button42));
+	        current[3][3] = (ImageView)(findViewById(R.id.button43));
+	        current[3][3] = (ImageView)(findViewById(R.id.button44));
+        }
             
         undoBut = (Button) findViewById(R.id.undoBut);
         undoBut.setEnabled(false);
@@ -75,8 +96,8 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
         //Log.d("moves", Integer.toString(moves));
         boolean skip = false;
         for (int i=0; i<moves; i++) {
-          	int x = (int) (Math.random()*4);
-           	int y = (int) (Math.random()*4);
+          	int x = (int) (Math.random()*gridSize);
+           	int y = (int) (Math.random()*gridSize);
            	int[] arr = {x, y};
            	for (int j=0; j<i; j++) {
            		if ((x == genCoor[j][0]) && (y == genCoor[j][1])) {
@@ -115,8 +136,8 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
     }
 
     public int[] findCoor(ImageView v){
-        for(int i = 0; i<4; i++){
-            for(int j = 0; j<4; j++){
+        for(int i = 0; i<gridSize; i++){
+            for(int j = 0; j<gridSize; j++){
                 if(current[i][j].equals(v)){
                     return new int[] {i,j};
                 }
@@ -191,7 +212,7 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
     
     public void clickBox(int[] coor) {
     	int col = 0;
-        if (coor[0] + 1 < 4) {
+        if (coor[0] + 1 < gridSize) {
             colorStates[coor[0] + 1][coor[1]] = (colorStates[coor[0] + 1][coor[1]] + 1) % 3;
             col = colorStates[coor[0] + 1][coor[1]];
             current[coor[0] + 1][coor[1]].setColorFilter(Color.argb(255, order[col], order[col], order[col]));
@@ -201,7 +222,7 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
             col = colorStates[coor[0] - 1][coor[1]];
             current[coor[0] - 1][coor[1]].setColorFilter(Color.argb(255, order[col], order[col], order[col]));
         }
-        if (coor[1] + 1 < 4) {
+        if (coor[1] + 1 < gridSize) {
             colorStates[coor[0]][coor[1] + 1] = (colorStates[coor[0]][coor[1] + 1] + 1) % 3;
             col = colorStates[coor[0]][coor[1] + 1];
             current[coor[0]][coor[1] + 1].setColorFilter(Color.argb(255, order[col], order[col], order[col]));
@@ -246,8 +267,8 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
     }
     
     public boolean checkBoard() {
-    	for (int i=0; i<colorStates.length; i++) {
-    		for (int j=0; j<colorStates[0].length; j++) {
+    	for (int i=0; i<gridSize; i++) {
+    		for (int j=0; j<gridSize; j++) {
     			if (colorStates[i][j] != 0) {
     				return false;
     			}
