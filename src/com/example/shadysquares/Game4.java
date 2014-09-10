@@ -3,6 +3,7 @@ package com.example.shadysquares;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -168,6 +169,7 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
             if (moveCount == moves) { //once all of the moves are used
             	handler.removeCallbacks(timer);
             	if (checkBoard()) {
+            		final Game4 gameCopy = this;
             		final AlertDialog diag1 = new AlertDialog.Builder(context).create();
             		diag1.setTitle("");
             		diag1.setMessage("Congratulations! \n You completed the puzzle. \n Your score is: " + elapsedTime);
@@ -180,7 +182,11 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
             		diag1.setButton(DialogInterface.BUTTON_NEUTRAL, "Go To Leaderboard", 
             				new DialogInterface.OnClickListener() {
             			public void onClick(DialogInterface dialog, int which) {
-            				//intent to leaderboard
+            				Intent lbIntent = new Intent(gameCopy, LeaderboardActivity.class);
+            				lbIntent.putExtra("time", elapsedTime);
+            				lbIntent.putExtra("name", "trololol");	// TODO: Actually do this lel
+            				lbIntent.putExtra("numMoves", moves);
+            				lbIntent.putExtra("gridSize", gridSize);
             			}
             		});
             		diag1.show();

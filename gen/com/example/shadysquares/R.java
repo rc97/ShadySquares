@@ -1101,7 +1101,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f050066;
+        public static final int action_settings=0x7f050072;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
@@ -1141,7 +1141,7 @@ containing a value of this type.
         public static final int end=0x7f050013;
         public static final int expand_activities_button=0x7f050026;
         public static final int expanded_menu=0x7f05002c;
-        public static final int help=0x7f050065;
+        public static final int help=0x7f050071;
         public static final int home=0x7f050014;
         public static final int homeAsUp=0x7f050005;
         public static final int icon=0x7f05002a;
@@ -1149,16 +1149,28 @@ containing a value of this type.
         public static final int image=0x7f050027;
         public static final int listMode=0x7f050001;
         public static final int list_item=0x7f050029;
+        public static final int menu=0x7f050069;
         public static final int middle=0x7f050012;
-        public static final int moves=0x7f050062;
+        public static final int moves=0x7f05006e;
+        public static final int name1=0x7f05005f;
+        public static final int name2=0x7f050061;
+        public static final int name3=0x7f050063;
+        public static final int name4=0x7f050065;
+        public static final int name5=0x7f050067;
         public static final int never=0x7f050009;
         public static final int none=0x7f050010;
         public static final int normal=0x7f050000;
-        public static final int numMoves=0x7f050063;
-        public static final int proceed=0x7f050064;
+        public static final int numMoves=0x7f05006f;
+        public static final int parentLayout=0x7f05005e;
+        public static final int proceed=0x7f050070;
         public static final int progress_circular=0x7f050018;
         public static final int progress_horizontal=0x7f050019;
         public static final int radio=0x7f05002f;
+        public static final int score1=0x7f050060;
+        public static final int score2=0x7f050062;
+        public static final int score3=0x7f050064;
+        public static final int score4=0x7f050066;
+        public static final int score5=0x7f050068;
         public static final int search_badge=0x7f050032;
         public static final int search_bar=0x7f050031;
         public static final int search_button=0x7f050033;
@@ -1173,10 +1185,10 @@ containing a value of this type.
         public static final int showCustom=0x7f050007;
         public static final int showHome=0x7f050004;
         public static final int showTitle=0x7f050006;
-        public static final int size=0x7f05005e;
-        public static final int size3=0x7f05005f;
-        public static final int size4=0x7f050060;
-        public static final int size5=0x7f050061;
+        public static final int size=0x7f05006a;
+        public static final int size3=0x7f05006b;
+        public static final int size4=0x7f05006c;
+        public static final int size5=0x7f05006d;
         public static final int split_action_bar=0x7f05001e;
         public static final int submit_area=0x7f050039;
         public static final int tabMode=0x7f050002;
@@ -1240,12 +1252,14 @@ containing a value of this type.
         public static final int activity_game3=0x7f030018;
         public static final int activity_game4=0x7f030019;
         public static final int activity_game5=0x7f03001a;
-        public static final int activity_main=0x7f03001b;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001c;
+        public static final int activity_leaderboard=0x7f03001b;
+        public static final int activity_main=0x7f03001c;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001d;
     }
     public static final class menu {
         public static final int game4=0x7f0c0000;
-        public static final int main=0x7f0c0001;
+        public static final int leaderboard=0x7f0c0001;
+        public static final int main=0x7f0c0002;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
