@@ -1,6 +1,9 @@
 package com.example.shadysquares;
 
 import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -130,6 +133,7 @@ public class LeaderboardActivity extends ActionBarActivity {
 
 	public void startMenu(View v) {
 		Intent intent = new Intent(this, MainActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		startActivity(intent);
 		finish();
 	}
@@ -141,8 +145,10 @@ public class LeaderboardActivity extends ActionBarActivity {
 		alert.setTitle("New High Score!");
 		alert.setMessage("You got a new high score! Enter your name:");
 
-		// Set an EditText view to get user input 
+		// Set an EditText view to g1et user input 
 		final EditText input = new EditText(this);
+		InputFilter[] maxFilter = {new InputFilter.LengthFilter(10)}; 
+		input.setFilters(maxFilter);
 		alert.setView(input);
 
 		final LeaderboardActivity self = this;
@@ -151,8 +157,33 @@ public class LeaderboardActivity extends ActionBarActivity {
 				self.finalizeBoard(input.getText().toString());
 			}
 		});
+		
+		final AlertDialog dialog = alert.create();
+		dialog.show();
+		dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+		// copied again from http://stackoverflow.com/questions/20682865/disable-button-when-edit-text-fields-empty
+		//TextWatcher
+	    final TextWatcher textWatcher = new TextWatcher() {
+	        @Override
+	        public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3)
+	        {
 
-		alert.show();
+	        }
+
+	        @Override
+	        public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+	            if (input.getText().toString().equals("")) {
+	            	dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+	            } else {
+	            	dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+	            }
+	        }
+
+	        @Override
+	        public void afterTextChanged(Editable editable) {
+	        }
+	    };
+	    input.addTextChangedListener(textWatcher);
 	}
 
 	private void finalizeBoard(String name) {
