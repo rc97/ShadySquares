@@ -11,6 +11,7 @@
     <string name="four">4x4</string>
     <string name="five">5x5</string>
     <string name="title_activity_game">GameActivity</string>
+    <string name="title_activity_leaderboard">LeaderboardActivity</string>
     <string name="game_activity">Game Activity</string>
     <string name="title_activity_game4">Game4</string>
     <string name="hello_world">Hello world!</string>

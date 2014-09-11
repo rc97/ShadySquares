@@ -1306,17 +1306,18 @@ containing a value of this type.
         public static final int app_name=0x7f0a000d;
         public static final int five=0x7f0a0015;
         public static final int four=0x7f0a0014;
-        public static final int game_activity=0x7f0a0017;
-        public static final int hello_world=0x7f0a0019;
-        public static final int help=0x7f0a001a;
+        public static final int game_activity=0x7f0a0018;
+        public static final int hello_world=0x7f0a001a;
+        public static final int help=0x7f0a001b;
         public static final int move_message=0x7f0a0011;
         public static final int moves=0x7f0a0010;
         public static final int proceed=0x7f0a0012;
         public static final int size=0x7f0a000e;
         public static final int three=0x7f0a0013;
         public static final int title_activity_game=0x7f0a0016;
-        public static final int title_activity_game4=0x7f0a0018;
-        public static final int undo=0x7f0a001b;
+        public static final int title_activity_game4=0x7f0a0019;
+        public static final int title_activity_leaderboard=0x7f0a0017;
+        public static final int undo=0x7f0a001c;
     }
     public static final class style {
         /** 

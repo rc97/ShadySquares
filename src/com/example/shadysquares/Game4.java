@@ -183,10 +183,12 @@ public class Game4 extends ActionBarActivity implements View.OnClickListener {
             				new DialogInterface.OnClickListener() {
             			public void onClick(DialogInterface dialog, int which) {
             				Intent lbIntent = new Intent(gameCopy, LeaderboardActivity.class);
-            				lbIntent.putExtra("time", elapsedTime);
-            				lbIntent.putExtra("name", "trololol");	// TODO: Actually do this lel
+            				lbIntent.putExtra("time", elapsedTime / 1000.0f);
+            				//lbIntent.putExtra("name", "trololol");	// TODO: Actually do this lel
             				lbIntent.putExtra("numMoves", moves);
             				lbIntent.putExtra("gridSize", gridSize);
+            				startActivity(lbIntent);
+            				finish();
             			}
             		});
             		diag1.show();
