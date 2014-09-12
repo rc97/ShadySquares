@@ -29,6 +29,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         
         NumberPicker np = (NumberPicker) findViewById(R.id.numMoves);
+        np.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
 		np.setMaxValue(6);
         np.setMinValue(3);
         np.setWrapSelectorWheel(true);
